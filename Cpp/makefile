@@ -3,8 +3,11 @@ CPPUTEST_HOME := ./cpputest-3.8
 TARGET_DIR := target
 
 SRC_DIRS := \
+	src/main/LedDriver \
 
 TEST_DIRS := \
+	src/test \
+	src/test/LedDriver \
 
 CPP := g++
 CPPFLAGS := -std=c++11
