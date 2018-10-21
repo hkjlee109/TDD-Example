@@ -3,7 +3,9 @@ CPPUTEST_HOME := ./cpputest-3.8
 TARGET_DIR := target
 
 SRC_DIRS := \
+	src/main/Interface \
 	src/main/LedDriver \
+  src/test/Double \
 
 TEST_DIRS := \
 	src/test \
