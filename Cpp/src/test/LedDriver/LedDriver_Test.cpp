@@ -1,6 +1,6 @@
-#include <CppUTest/TestHarness.h>
 #include "LedDriver.h"
 #include "DigitalOutputGroup_TestDouble.h"
+#include <CppUTest/TestHarness.h>
 
 #define Given
 #define When
@@ -28,19 +28,13 @@ enum
   GpioChannel_BlueLed
 };
 
-static const LedDriver_MappingElement_t mappingElements[] =
+static const LedDriver_MappingTable_t mappingTable =
   {
     { LedId_Green,  GpioChannel_GreenLed  },
     { LedId_Yellow, GpioChannel_YellowLed },
     { LedId_Red,    GpioChannel_RedLed    },
     { LedId_Blue,   GpioChannel_BlueLed   }
   };
-
-static const LedDriver_MappingConfiguration_t mappingConfiguration =
-   {
-      mappingElements,
-      NUM_ELEMENTS(mappingElements)
-   };
 
 TEST_GROUP(LedDriver)
 {
@@ -66,7 +60,7 @@ TEST_GROUP(LedDriver)
   {
     ledDriver = new LedDriver(
       *digitalOutputGroupTestDouble,
-      mappingConfiguration);
+      mappingTable);
   }
 
   void LedRequestedTurn(bool state, uint16_t ledId)
@@ -81,9 +75,9 @@ TEST_GROUP(LedDriver)
 
   void AllLedsShouldBeTurned(bool expected)
   {
-    for(uint16_t channel = 0; channel < NumberOfDigitalOutput; channel++)
+    for(auto &map : mappingTable)
     {
-      LedShouldBeTurned(expected, channel);
+      LedShouldBeTurned(expected, map.second);
     }
   }
 };

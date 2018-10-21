@@ -2,18 +2,18 @@
 
 LedDriver::LedDriver(
   I_DigitalOutputGroup &digitalOutputGroup,
-  const LedDriver_MappingConfiguration_t &configuration) :
+  const LedDriver_MappingTable_t &mappingTable) :
     digitalOutputGroup(digitalOutputGroup),
-    configuration(configuration) {};
+    mappingTable(mappingTable) {};
 
 void LedDriver::WriteGpio(uint16_t ledId, bool state)
 {
-  for(int i = 0; i < configuration.numberOfElements; i++)
+  for(auto &map : this->mappingTable)
   {
-    if(ledId == this->configuration.mappingTable[i].ledId)
+    if(ledId == map.first)
     {
       this->digitalOutputGroup.Write(
-        this->configuration.mappingTable[i].gpioChannel,
+        map.second,
         state);
       break;
     }
