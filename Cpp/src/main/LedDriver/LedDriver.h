@@ -20,7 +20,8 @@ public:
   LedDriver(
     I_DigitalOutputGroup &digitalOutputGroup,
     const LedDriver_MappingTable_t &mappingTable);
-
+  ~LedDriver();
+  
   void TurnOn(uint16_t ledId);
   void TurnOff(uint16_t ledId);
 };

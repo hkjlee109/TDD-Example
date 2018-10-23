@@ -4,7 +4,13 @@ LedDriver::LedDriver(
   I_DigitalOutputGroup &digitalOutputGroup,
   const LedDriver_MappingTable_t &mappingTable) :
     digitalOutputGroup(digitalOutputGroup),
-    mappingTable(mappingTable) {};
+    mappingTable(mappingTable)
+{
+}
+
+LedDriver::~LedDriver()
+{
+}
 
 void LedDriver::WriteGpio(uint16_t ledId, bool state)
 {
@@ -18,14 +24,14 @@ void LedDriver::WriteGpio(uint16_t ledId, bool state)
       break;
     }
   }
-};
+}
 
 void LedDriver::TurnOn(uint16_t ledId)
 {
   this->WriteGpio(ledId, true);
-};
+}
 
 void LedDriver::TurnOff(uint16_t ledId)
 {
   this->WriteGpio(ledId, false);
-};
+}

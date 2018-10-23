@@ -1,11 +1,10 @@
+#include <memory>
 #include "LedDriver.h"
 #include "DigitalOutputGroup_TestDouble.h"
 #include <CppUTest/TestHarness.h>
 
 #define Given
 #define When
-
-#define NUM_ELEMENTS(array) (sizeof(array)/sizeof(array[0]))
 
 enum
 {
@@ -39,26 +38,23 @@ static const LedDriver_MappingTable_t mappingTable =
 TEST_GROUP(LedDriver)
 {
   bool digitalOutputTestBuffer[NumberOfDigitalOutput];
-  LedDriver *ledDriver;
-  DigitalOutputGroup_TestDouble *digitalOutputGroupTestDouble;
+  shared_ptr<LedDriver> ledDriver{nullptr};
+  shared_ptr<DigitalOutputGroup_TestDouble> digitalOutputGroupTestDouble{nullptr};
 
   void setup()
   {
-    digitalOutputGroupTestDouble =
-      new DigitalOutputGroup_TestDouble(
-        digitalOutputTestBuffer,
-        sizeof(digitalOutputTestBuffer));
+    digitalOutputGroupTestDouble = make_shared<DigitalOutputGroup_TestDouble>(
+      digitalOutputTestBuffer,
+      sizeof(digitalOutputTestBuffer));
   }
 
   void teardown()
   {
-    delete ledDriver;
-    delete digitalOutputGroupTestDouble;
   }
 
   void LedDriverIsInitialized()
   {
-    ledDriver = new LedDriver(
+    ledDriver = make_shared<LedDriver>(
       *digitalOutputGroupTestDouble,
       mappingTable);
   }
