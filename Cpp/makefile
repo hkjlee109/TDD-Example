@@ -1,11 +1,11 @@
-CPPUTEST_HOME := ./cpputest-3.8
+CPPUTEST_HOME := cpputest-3.8
 
 TARGET_DIR := target
 
 SRC_DIRS := \
 	src/main/Interface \
 	src/main/LedDriver \
-  src/test/Double \
+	src/test/Double \
 
 TEST_DIRS := \
 	src/test \
@@ -33,6 +33,11 @@ test: $(TEST_OBJS) $(SRC_OBJS)
 clean:
 	rm -f $(SRC_OBJS) $(TEST_OBJS) $(TARGET_DIR)/*
 
+.PHONY: cpputest
+cpputest: 
+	cd $(CPPUTEST_HOME) && ./autogen.sh && \
+	./configure && make && make check
+	
 .PHONY: debug
 debug:
 	@echo
