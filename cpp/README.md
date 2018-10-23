@@ -8,7 +8,9 @@ make
 
 ```
 MacBookPro:Cpp Harry$ make
-g++ -o target/test src/test/AllTests.o src/test/LedDriver/LedDriver_Test.o src/main/LedDriver/LedDriver.o src/test/Double/DigitalOutputGroup_TestDouble.o -Lcpputest-3.8/lib -lCppUTest
+g++ -o target/test src/test/AllTests.o src/test/LedDriver/LedDriver_Test.o 
+src/main/LedDriver/LedDriver.o src/test/Double/DigitalOutputGroup_TestDouble.o 
+-Lcpputest-3.8/lib -lCppUTest
 target/test -v
 TEST(LedDriver, ShouldBeAbleToTurnLedsOff) - 0 ms
 TEST(LedDriver, ShouldBeAbleToTurnMultipleLedsOn) - 0 ms
