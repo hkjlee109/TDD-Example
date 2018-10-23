@@ -13,9 +13,9 @@ private:
 public:
   DigitalOutputGroup_TestDouble(
     bool *states,
-    uint16_t channelCount = 65535) :
-      states(states) {};
-  ~DigitalOutputGroup_TestDouble() {};
+    uint16_t channelCount);
+
+  ~DigitalOutputGroup_TestDouble();
 
   bool GetState(uint16_t channel);
 

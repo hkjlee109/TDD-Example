@@ -18,9 +18,7 @@ void LedDriver::WriteGpio(uint16_t ledId, bool state)
   {
     if(ledId == map.first)
     {
-      this->digitalOutputGroup.Write(
-        map.second,
-        state);
+      this->digitalOutputGroup.Write(map.second, state);
       break;
     }
   }
